@@ -38,11 +38,11 @@ done
 
 ## Preparing the Disks
 
-mkfs.ext4 /dev/hda2
-mount /dev/hda2 /mnt/gentoo
+mkfs.ext4 /dev/sda2
+mount /dev/sda2 /mnt/gentoo
 mkdir -p /mnt/gentoo/boot
-mke2fs /dev/hda1
-mount /dev/hda1 /mnt/gentoo/boot
+mke2fs /dev/sda1
+mount /dev/sda1 /mnt/gentoo/boot
 
 ## Preparing the swap file
 cd /mnt/gentoo
