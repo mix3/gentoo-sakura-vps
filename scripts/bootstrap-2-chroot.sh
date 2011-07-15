@@ -50,11 +50,13 @@ GW=$(cat ${BROOT}/netconfig/gw.txt)
 RESOLV=$(cat ${BROOT}/netconfig/resolv.txt)
 
 cat >> /etc/conf.d/net <<EOM
-config_eth0=( "${ADDR} netmask ${MASK} broadcast ${BCAST}" )
-routes_eth0=( "default via ${GW}" )
+config_eth0="${ADDR} netmask ${MASK} broadcast ${BCAST}"
+routes_eth0="default via ${GW}"
 dns_servers_eth0="${RESOLV}"
 EOM
 
+emerge iproute2 --quiet
+ln -s net.lo /etc/init.d/net.eth0
 rc-update add net.eth0 default
 
 sed -i \
