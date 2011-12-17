@@ -28,14 +28,14 @@ emerge gentoo-sources --quiet
 emerge gentoo-sources -p --quiet | \
 	egrep -o "gentoo-sources-[r0-9.-]+" | egrep -o "[0-9][r0-9.-]+" > /kernel-version.txt
 
-emerge genkernel --quiet
-genkernel all
-
 #cd /usr/src/linux
 #cp $(find ${SCRIPTSDIR}/scripts/linux-config -type f | sort -nr | head -n 1) .config
 #make oldconfig
 #make && make modules_install
 #cp arch/x86_64/boot/bzImage /boot/kernel-$(cat /kernel-version.txt)
+
+emerge genkernel --quiet
+genkernel all
 
 ## Configuring your System
 
@@ -112,8 +112,8 @@ serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
 terminal --timeout=10 serial console
 title=Gentoo
 	root (hd0,0)
-	kernel /boot/kernel-genkernel-x86-64-$(cat /kernel-version.txt)-gentoo root=/dev/ram0 real_root=/dev/sda2 rootfstype=ext4 console=tty0 console=ttyS0,115200n8r
-	initrd /boot/initramfs-genkernel-x86-64-$(cat /kernel-version.txt)-gentoo
+	kernel /boot/kernel-genkernel-x86_64-$(cat /kernel-version.txt)-gentoo root=/dev/ram0 real_root=/dev/sda2 rootfstype=ext4 console=tty0 console=ttyS0,115200n8r
+	initrd /boot/initramfs-genkernel-x86_64-$(cat /kernel-version.txt)-gentoo
 EOM
 
 grep -v rootfs /proc/mounts > /etc/mtab
